@@ -1,11 +1,11 @@
 MPLINK 4.40, Linker
-Linker Map File - Created Fri Aug 21 21:00:59 2020
+Linker Map File - Created Fri Oct 16 11:09:11 2020
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
-                   .org_0       code   0x000000    program   0x000064
-                   .cinit    romdata   0x000032    program   0x000004
+                   .org_0       code   0x000000    program   0x000098
+                   .cinit    romdata   0x00004c    program   0x000004
       .config_2007_KEKS.O       code   0x002007    program   0x000002
 
 
@@ -13,44 +13,52 @@ Linker Map File - Created Fri Aug 21 21:00:59 2020
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000033      
+                            0x000000    0x00004d      
                             0x002007    0x002007      
-            53 out of 8454 program addresses used, program memory utilization is 0%
+            79 out of 8454 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                    begin   0x00002d    program     static D:\LAB\keks\keks.asm     
-                    delay   0x00002c    program     static D:\LAB\keks\keks.asm     
-                    scan0   0x000020    program     static D:\LAB\keks\keks.asm     
-                    scan1   0x000023    program     static D:\LAB\keks\keks.asm     
-                    scan2   0x000026    program     static D:\LAB\keks\keks.asm     
-                    scan3   0x000029    program     static D:\LAB\keks\keks.asm     
-                   stage0   0x00000b    program     static D:\LAB\keks\keks.asm     
-                   stage1   0x000010    program     static D:\LAB\keks\keks.asm     
-                   stage2   0x000012    program     static D:\LAB\keks\keks.asm     
-                   stage3   0x000015    program     static D:\LAB\keks\keks.asm     
-                   stage4   0x000018    program     static D:\LAB\keks\keks.asm     
-                   stage5   0x00001c    program     static D:\LAB\keks\keks.asm     
+                    begin   0x000045    program     static D:\LAB\keks\keks.asm     
+                       c1   0x000035    program     static D:\LAB\keks\keks.asm     
+                       c2   0x00003d    program     static D:\LAB\keks\keks.asm     
+                       d1   0x00003a    program     static D:\LAB\keks\keks.asm     
+                       d2   0x000042    program     static D:\LAB\keks\keks.asm     
+                    delay   0x00002f    program     static D:\LAB\keks\keks.asm     
+                    scan0   0x000023    program     static D:\LAB\keks\keks.asm     
+                    scan1   0x000026    program     static D:\LAB\keks\keks.asm     
+                    scan2   0x000029    program     static D:\LAB\keks\keks.asm     
+                    scan3   0x00002c    program     static D:\LAB\keks\keks.asm     
+                   stage0   0x00000e    program     static D:\LAB\keks\keks.asm     
+                   stage1   0x000013    program     static D:\LAB\keks\keks.asm     
+                   stage2   0x000015    program     static D:\LAB\keks\keks.asm     
+                   stage3   0x000018    program     static D:\LAB\keks\keks.asm     
+                   stage4   0x00001b    program     static D:\LAB\keks\keks.asm     
+                   stage5   0x00001f    program     static D:\LAB\keks\keks.asm     
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   stage0   0x00000b    program     static D:\LAB\keks\keks.asm     
-                   stage1   0x000010    program     static D:\LAB\keks\keks.asm     
-                   stage2   0x000012    program     static D:\LAB\keks\keks.asm     
-                   stage3   0x000015    program     static D:\LAB\keks\keks.asm     
-                   stage4   0x000018    program     static D:\LAB\keks\keks.asm     
-                   stage5   0x00001c    program     static D:\LAB\keks\keks.asm     
-                    scan0   0x000020    program     static D:\LAB\keks\keks.asm     
-                    scan1   0x000023    program     static D:\LAB\keks\keks.asm     
-                    scan2   0x000026    program     static D:\LAB\keks\keks.asm     
-                    scan3   0x000029    program     static D:\LAB\keks\keks.asm     
-                    delay   0x00002c    program     static D:\LAB\keks\keks.asm     
-                    begin   0x00002d    program     static D:\LAB\keks\keks.asm     
+                   stage0   0x00000e    program     static D:\LAB\keks\keks.asm     
+                   stage1   0x000013    program     static D:\LAB\keks\keks.asm     
+                   stage2   0x000015    program     static D:\LAB\keks\keks.asm     
+                   stage3   0x000018    program     static D:\LAB\keks\keks.asm     
+                   stage4   0x00001b    program     static D:\LAB\keks\keks.asm     
+                   stage5   0x00001f    program     static D:\LAB\keks\keks.asm     
+                    scan0   0x000023    program     static D:\LAB\keks\keks.asm     
+                    scan1   0x000026    program     static D:\LAB\keks\keks.asm     
+                    scan2   0x000029    program     static D:\LAB\keks\keks.asm     
+                    scan3   0x00002c    program     static D:\LAB\keks\keks.asm     
+                    delay   0x00002f    program     static D:\LAB\keks\keks.asm     
+                       c1   0x000035    program     static D:\LAB\keks\keks.asm     
+                       d1   0x00003a    program     static D:\LAB\keks\keks.asm     
+                       c2   0x00003d    program     static D:\LAB\keks\keks.asm     
+                       d2   0x000042    program     static D:\LAB\keks\keks.asm     
+                    begin   0x000045    program     static D:\LAB\keks\keks.asm     
 
 

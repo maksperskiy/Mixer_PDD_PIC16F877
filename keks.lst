@@ -1,4 +1,4 @@
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  1
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -27,70 +27,109 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0006   1283 1303      00012         banksel ADCON0
 0008   0185           00013         clrf PORTA
 0009   0186           00014         clrf PORTÂ
-000A   2???           00015         goto begin
-000B                  00016 stage0
-000B   1185           00017         bcf PORTA,0x03
-000C   1105           00018         bcf PORTA,0x02
-000D   1085           00019         bcf PORTA,0x01
-000E   1005           00020         bcf PORTA,0x00
-000F   2???           00021         goto stage1
-0010                  00022 stage1
-0010   1485           00023         bsf PORTA,0x01
-0011   2???           00024         goto scan0
-0012                  00025 stage2
-0012   1085           00026         bcf PORTA,0x01
-0013   1505           00027         bsf PORTA,0x02
-0014   2???           00028         goto scan1
-0015                  00029 stage3
-0015   1105           00030         bcf PORTA,0x02
-0016   1405           00031         bsf PORTA,0x00
-0017   2???           00032         goto delay
-0018                  00033 stage4
-0018   1005           00034         bcf PORTA,0x00
-0019   1485           00035         bsf PORTA,0x01
-001A   1505           00036         bsf PORTA,0x02
-001B   2???           00037         goto scan2
-001C                  00038 stage5
-001C   1085           00039         bcf PORTA,0x01
-001D   1105           00040         bcf PORTA,0x02
-001E   1585           00041         bsf PORTA,0x03
-001F   2???           00042         goto scan3
-0020                  00043 scan0
-0020   1806           00044         btfsc PORTB,0x00
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  2
+000A   3002           00015         movlw 0x02      ;íàñòðîéêà option(0x07 - 1:256, 0x00 - 1:2, 0x01 - 1:4 ...)
+Warning[224]: Use of this instruction is not recommended.
+000B   0062           00016         option
+000C   0181           00017         clrf 0x01
+000D   2???           00018         goto begin
+000E                  00019 stage0
+000E   1185           00020         bcf PORTA,0x03
+000F   1105           00021         bcf PORTA,0x02
+0010   1085           00022         bcf PORTA,0x01
+0011   1005           00023         bcf PORTA,0x00
+0012   2???           00024         goto stage1
+0013                  00025 stage1
+0013   1485           00026         bsf PORTA,0x01
+0014   2???           00027         goto scan0
+0015                  00028 stage2
+0015   1085           00029         bcf PORTA,0x01
+0016   1505           00030         bsf PORTA,0x02
+0017   2???           00031         goto scan1
+0018                  00032 stage3
+0018   1105           00033         bcf PORTA,0x02
+0019   1405           00034         bsf PORTA,0x00
+001A   2???           00035         goto delay
+001B                  00036 stage4
+001B   1005           00037         bcf PORTA,0x00
+001C   1485           00038         bsf PORTA,0x01
+001D   1505           00039         bsf PORTA,0x02
+001E   2???           00040         goto scan2
+001F                  00041 stage5
+001F   1085           00042         bcf PORTA,0x01
+0020   1105           00043         bcf PORTA,0x02
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0021   2???           00045         goto stage2
-0022   2???           00046         goto stage1
-0023                  00047 scan1
-0023   1886           00048         btfsc PORTB,0x01
-0024   2???           00049         goto stage3
-0025   2???           00050         goto stage2
-0026                  00051 scan2
-0026   1906           00052         btfsc PORTB,0x02
-0027   2???           00053         goto stage5
-0028   2???           00054         goto stage4
-0029                  00055 scan3
-0029   1C06           00056         btfss PORTB,0x00
-002A   2???           00057         goto stage0
-002B   2???           00058         goto stage5
-002C                  00059 delay
-002C   2???           00060         goto stage4
-002D                  00061 begin
-  00000005            00062 PORTA   equ 0x05
-  00000006            00063 PORTÂ   equ 0x06
-002D   3007           00064         movlw 0x07
+0021   1585           00044         bsf PORTA,0x03
+0022   2???           00045         goto scan3
+0023                  00046 scan0
+0023   1806           00047         btfsc PORTB,0x00
+0024   2???           00048         goto stage2
+0025   2???           00049         goto stage1
+0026                  00050 scan1
+0026   1886           00051         btfsc PORTB,0x01
+0027   2???           00052         goto stage3
+0028   2???           00053         goto stage2
+0029                  00054 scan2
+0029   1906           00055         btfsc PORTB,0x02
+002A   2???           00056         goto stage5
+002B   2???           00057         goto stage4
+002C                  00058 scan3
+002C   1C06           00059         btfss PORTB,0x00
+002D   2???           00060         goto stage0
+002E   2???           00061         goto stage5
+002F                  00062 delay           ;çàäåðæêà
+002F   0181           00063         clrf 0x01
+0030   30FF           00064         movlw 0xFF
+0031   00F8           00065         movwf 0x78
+0032   3031           00066         movlw 0x31
+0033   00F9           00067         movwf 0x79
+0034   2???           00068         goto c1
+0035                  00069 c1
+0035   30FF           00070         movlw 0xff
+0036   0201           00071         subwf 0x01,0
+0037   1D03           00072         btfss STATUS,0x02
+0038   2???           00073         goto c1
+0039   2???           00074         goto d1
+003A                  00075 d1
+003A   0BF9           00076         decfsz 0x79,1
+003B   2???           00077         goto c1
+003C   2???           00078         goto c2
+003D                  00079 c2
+003D   30FF           00080         movlw 0xff
+003E   0201           00081         subwf 0x01,0
+003F   1D03           00082         btfss STATUS,0x02
+0040   2???           00083         goto c2
+0041   2???           00084         goto d2
+0042                  00085 d2
+0042   0BF8           00086         decfsz 0x78,1
+0043   2???           00087         goto c2
+0044   2???           00088         goto stage4
+0045                  00089 begin
+  00000005            00090 PORTA   equ 0x05
+  00000006            00091 PORTÂ   equ 0x06
+  00000001            00092 TMR0    equ 0x01
+  00000003            00093 STATUS  equ 0x03
+0045   30FF           00094         movlw 0xFF
+0046   0081           00095         movwf OPTION_REG
+0047   3007           00096         movlw 0x07
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 Warning[224]: Use of this instruction is not recommended.
-002E   0066           00065         tris PORTÂ
-002F   3000           00066         movlw 0x00
+0048   0066           00097         tris PORTÂ
+0049   3000           00098         movlw 0x00
 Warning[224]: Use of this instruction is not recommended.
-0030   0065           00067         tris PORTA
-0031   2???           00068         goto stage0
-3FFB                  00069         end
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  3
+004A   0065           00099         tris PORTA
+004B   2???           00100         goto stage0
+3FFB                  00101         end
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  4
 
 
 SYMBOL TABLE
@@ -149,7 +188,7 @@ CSRC                              00000007
 D                                 00000005
 DATA_ADDRESS                      00000005
 DC                                00000001
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  4
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  5
 
 
 SYMBOL TABLE
@@ -208,7 +247,7 @@ PCFG0                             00000000
 PCFG1                             00000001
 PCFG2                             00000002
 PCFG3                             00000003
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  5
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  6
 
 
 SYMBOL TABLE
@@ -267,7 +306,7 @@ RC9                               00000006
 RCD8                              00000000
 RCEN                              00000003
 RCIE                              00000005
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  6
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  7
 
 
 SYMBOL TABLE
@@ -326,7 +365,7 @@ T1CKPS1                           00000005
 T1CON                             00000010
 T1INSYNC                          00000002
 T1OSCEN                           00000003
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  7
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  8
 
 
 SYMBOL TABLE
@@ -385,7 +424,7 @@ TRISD2                            00000002
 TRISD3                            00000003
 TRISD4                            00000004
 TRISD5                            00000005
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  8
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE  9
 
 
 SYMBOL TABLE
@@ -444,27 +483,31 @@ _WRT_ENABLE_ON                    00003FFF
 _XT_OSC                           00003FFD
 __16F877                          00000001
 __DEBUG                           1
-MPASM  5.42                          KEKS.ASM   8-21-2020  21:00:57         PAGE  9
+MPASM  5.42                          KEKS.ASM   10-16-2020  11:09:09         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-begin                             0000002D
-delay                             0000002C
-scan0                             00000020
-scan1                             00000023
-scan2                             00000026
-scan3                             00000029
-stage0                            0000000B
-stage1                            00000010
-stage2                            00000012
-stage3                            00000015
-stage4                            00000018
-stage5                            0000001C
+begin                             00000045
+c1                                00000035
+c2                                0000003D
+d1                                0000003A
+d2                                00000042
+delay                             0000002F
+scan0                             00000023
+scan1                             00000026
+scan2                             00000029
+scan3                             0000002C
+stage0                            0000000E
+stage1                            00000013
+stage2                            00000015
+stage3                            00000018
+stage4                            0000001B
+stage5                            0000001F
 
 Errors   :     0
-Warnings :     2 reported,     0 suppressed
-Messages :     0 reported,     1 suppressed
+Warnings :     3 reported,     0 suppressed
+Messages :     0 reported,     2 suppressed
 
 

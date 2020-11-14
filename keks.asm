@@ -12,6 +12,9 @@
 	banksel ADCON0
 	clrf PORTA
 	clrf PORTВ
+	movlw 0x02	;настройка option(0x07 - 1:256, 0x00 - 1:2, 0x01 - 1:4 ...)
+	option
+	clrf 0x01
 	goto begin
 stage0
 	bcf PORTA,0x03
@@ -56,11 +59,40 @@ scan3
 	btfss PORTB,0x00
 	goto stage0
 	goto stage5
-delay
+delay		;задержка
+	clrf 0x01
+	movlw 0xFF
+	movwf 0x78
+	movlw 0x31
+	movwf 0x79
+	goto c1
+c1
+	movlw 0xff
+	subwf 0x01,0
+	btfss STATUS,0x02
+	goto c1
+	goto d1
+d1
+	decfsz 0x79,1
+	goto c1
+	goto c2
+c2
+	movlw 0xff
+	subwf 0x01,0
+	btfss STATUS,0x02
+	goto c2
+	goto d2
+d2
+	decfsz 0x78,1
+	goto c2
 	goto stage4
 begin
 PORTA	equ 0x05
 PORTВ	equ 0x06
+TMR0	equ 0x01
+STATUS	equ 0x03
+	movlw 0xFF
+	movwf OPTION_REG
 	movlw 0x07
 	tris PORTВ
 	movlw 0x00
